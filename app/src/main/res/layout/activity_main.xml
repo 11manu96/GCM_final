@@ -10,4 +10,10 @@
         android:layout_centerInParent="true"
         android:text="@string/regbutton" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/regid" />
+
 </RelativeLayout>

@@ -7,17 +7,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gcm.GCMRegistrar;
+import com.crashlytics.android.Crashlytics;
+
+import java.util.concurrent.TimeUnit;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "GCM Tutorial::Activity";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
+        final EditText regId = (EditText) findViewById(R.id.regid);
         GCMRegistrar.checkDevice(this);
         GCMRegistrar.checkManifest(this);
 
@@ -32,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                 // Sender ID will be registered into GCMRegistrar
                 GCMRegistrar.register(MainActivity.this,
                         GCMIntentService.SENDER_ID);
+                Log.d("hello", GCMRegistrar.getRegistrationId(getApplicationContext()));
+
+                regId.setText(GCMRegistrar.getRegistrationId(getApplicationContext()));
+                long timeMillis = System.currentTimeMillis();
+                long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+                Log.d("time", String.valueOf(timeSeconds) +"\n"+ String.valueOf(timeMillis));
             }
         });
     }
