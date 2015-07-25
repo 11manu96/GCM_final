@@ -28,7 +28,7 @@ public class UpdatingServer {
     public UpdatingServer(){
 
     }
-//hello
+//helloj
     public static String POST(String urls){
 
         InputStream inputStream = null;
